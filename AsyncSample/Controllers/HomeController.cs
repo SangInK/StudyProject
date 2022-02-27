@@ -8,5 +8,15 @@ namespace AsyncSample.Controllers
         {
             return View();
         }
+
+        public JsonResult AjaxTest()
+        {
+            Random random = new();
+            int delayTime = random.Next(1000, 10000);
+
+            Thread.Sleep(delayTime);
+
+            return Json(new { message= "message", delayTime= delayTime });
+        }
     }
 }
