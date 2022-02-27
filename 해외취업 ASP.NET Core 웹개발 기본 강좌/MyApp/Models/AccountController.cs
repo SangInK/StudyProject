@@ -18,7 +18,7 @@ namespace MyApp.Models
 
         public IActionResult Register()
         {
-            int a = 1;
+
             return View();
         }
     }
