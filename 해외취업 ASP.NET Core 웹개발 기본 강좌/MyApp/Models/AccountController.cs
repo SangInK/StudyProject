@@ -8,5 +8,17 @@ namespace MyApp.Models
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Login(string email, string password)
+        {
+
+            return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
     }
 }
