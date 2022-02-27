@@ -2,6 +2,139 @@
     ViewBag.Title = "Index";
 }
 
-<div>
-    <h2>tet</h2>
+<script>
+    function test() {
+        console.log("========================================");
+
+        console.log("test - 1");
+        console.log(delayReturn("test", 2));
+        console.log(delayReturn("test", 4));
+        console.log(delayReturn("test", 6));
+        console.log("test - 3");
+    }
+
+    async function test2() {
+        console.log("========================================");
+
+        console.log("test2 - 1");
+        console.log(await delayReturn("test2", 2));
+        console.log(await delayReturn("test2", 4));
+        console.log(await delayReturn("test2", 6));
+        console.log("test2 - 3");
+    }
+
+    function delayReturn(name, value) {
+        setTimeout(() => {
+            console.log("delayReturn " + name + " - " + value);
+
+            return "delayReturn " + name + "- " + (value + 1);
+        }, 3000)
+    }
+
+    function testPromise() {
+        console.log("========================================");
+
+        console.log("testPromise - 1");
+        console.log(delayReturnPromise("testPromise", 2));
+        console.log(delayReturnPromise("testPromise", 4));
+        console.log(delayReturnPromise("testPromise", 6));
+        console.log("testPromise - 3");
+    }
+
+    async function testPromise2() {
+        console.log("========================================");
+
+        console.log("testPromise2 - 1");
+        console.log(await delayReturnPromise("testPromise2", 2));
+        console.log(await delayReturnPromise("testPromise2", 4));
+        console.log(await delayReturnPromise("testPromise2", 6));
+        console.log("testPromise2 - 3");
+    }
+
+    function delayReturnPromise(name, value) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("delayReturnPromise " + name + " - " + value);
+
+                resolve("delayReturnPromise " + name + " - " + (value + 1));
+            }, 3000)
+        }) 
+    }
+
+    function testAjax() {
+        console.log("========================================");
+
+        console.log("testAjax - 1");
+        console.log(delayReturnAjax("testAjax", 2));
+        console.log(delayReturnAjax("testAjax", 4));
+        console.log(delayReturnAjax("testAjax", 6));
+        console.log("testAjax - 3");
+    }
+
+    async function testAjax2() {
+        console.log("========================================");
+
+        console.log("testAjax2 - 1");
+        console.log(await delayReturnAjax("testAjax2", 2));
+        console.log(await delayReturnAjax("testAjax2", 4));
+        console.log(await delayReturnAjax("testAjax2", 6));
+        console.log("testAjax2 - 3");
+    }
+
+    function delayReturnAjax(name, value) {
+        $.ajax({
+            type: "POST",
+            url: "/Home/AjaxTest"
+        }).done((...arguments)=>{
+                console.log("delayReturnAjax " + name + " - " + value);
+
+                return "delayReturnAjax " + name + " - " + arguments[0].delayTime;
+        })
+    }
+
+    function testAjaxPromise() {
+        console.log("========================================");
+
+        console.log("testAjaxPromise - 1");
+        console.log(delayReturnAjaxPromise("testAjaxPromise", 2));
+        console.log(delayReturnAjaxPromise("testAjaxPromise", 4));
+        console.log(delayReturnAjaxPromise("testAjaxPromise", 6));
+        console.log("testAjaxPromise - 3");
+    }
+
+    async function testAjaxPromise2() {
+        console.log("========================================");
+
+        console.log("testAjaxPromise2 - 1");
+        console.log(await delayReturnAjaxPromise("testAjaxPromise2", 2));
+        console.log(await delayReturnAjaxPromise("testAjaxPromise2", 4));
+        console.log(await delayReturnAjaxPromise("testAjaxPromise2", 6));
+        console.log("testAjaxPromise2 - 3");
+    }
+
+    function delayReturnAjaxPromise(name, value) {
+        return new Promise((resolve, reject)=>{
+            $.ajax({
+                type: "POST",
+                url: "/Home/AjaxTest"
+            }).done((...arguments)=>{
+                    console.log("delayReturnAjax " + name + " - " + value);
+
+                    resolve("delayReturnAjax " + name + " - " + arguments[0].delayTime);
+            })
+
+        })
+    }
+</script>
+
+
+<div class="container text-center">
+    <button class="btn btn-secondary" onclick="test()">go Test</button>
+    <button class="btn btn-secondary" onclick="test2()">go Test2</button>
+    <button class="btn btn-secondary" onclick="testPromise()">go testPromise</button>
+    <button class="btn btn-secondary" onclick="testPromise2()">go testPromise2</button>
+    <button class="btn btn-secondary" onclick="testAjax()">go testAjax</button>
+    <button class="btn btn-secondary" onclick="testAjax2()">go testAjax2</button>
+    <button class="btn btn-secondary" onclick="testAjaxPromise()">go testAjaxPromise</button>
+    <button class="btn btn-secondary" onclick="testAjaxPromise2()">go testAjaxPromise2</button>
 </div>
