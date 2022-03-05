@@ -1,0 +1,24 @@
+﻿@model StudentTeacherViewModel
+
+@{
+    ViewBag.Title = "DetailStudent";
+}
+
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <div style="flex: 0 0 30%;">
+            <h2>학생 정보</h2>
+            <hr />
+            <h3>아이디 : @Model.Student.Id</h3>
+            <h3>이름 : @Model.Student.Name</h3>
+            <h3>나이 : @Model.Student.Age</h3>
+            <h3>국적 : @Model.Student.Country</h3>
+
+            <hr />
+            <a class="btn btn-primary"  asp-controller="Home" asp-action="UpdateStudent" asp-route-id="@Model.Student.Id">수정</a>
+        </div>
+        
+    </div>
+
+    @await Html.PartialAsync("_StudentTable", @Model)
+</div>
