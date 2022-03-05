@@ -12,6 +12,7 @@ builder.Services.AddTransient<DbSeeder>();
 
 //Scoped : 요청 당 한 번 생성
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
 //Singleton : 처음으로 요청 받을 때에 생성. 이후의 요청들은 최초에 생성된 인스턴스를 사용.
 

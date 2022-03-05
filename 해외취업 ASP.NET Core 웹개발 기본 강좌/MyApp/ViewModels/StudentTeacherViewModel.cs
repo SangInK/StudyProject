@@ -12,7 +12,5 @@ namespace MyApp.ViewModels
 
         public IEnumerable<Teacher> Teachers { get; set; }
 
-
-
     }
 }

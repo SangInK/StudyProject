@@ -1,0 +1,23 @@
+﻿@model StudentTeacherViewModel
+
+<br />
+<br />
+<hr />
+<h2>학생 목록</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>학생명</th>
+            <th>상세</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.Students)
+        {
+            <tr>
+                <td>@student.Name</td>
+                <td><a asp-controller="Home" asp-action="DetailStudent" asp-route-id="@student.Id">상세</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

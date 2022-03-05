@@ -10,7 +10,7 @@ namespace MyApp.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [Range(15, 70)]
+        [Range(12, 70)]
         public int Age { get; set; } 
 
         [Required]
