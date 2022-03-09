@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RegisterViewModel
+@{
     ViewBag.Title = "Register";
 }
 
@@ -9,25 +10,30 @@
             <hr />
 
             <form asp-antiforgery=true method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
-                    <label>이메일</label>
-                    <input class="form-control" type="text" />
+                    <label asp-for="@Model.Email">이메일</label>
+                    <input class="form-control" type="text" asp-for="@Model.Email"/>
+                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label>이름</label>
-                    <input class="form-control" type="text" />
+                    <label asp-for="@Model.NickName">별명</label>
+                    <input class="form-control" type="text" asp-for="@Model.NickName"/>
+                    <span asp-validation-for="@Model.NickName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label>비밀번호</label>
-                    <input class="form-control" type="text" />
+                    <label asp-for="@Model.Password">비밀번호</label>
+                    <input class="form-control" type="password" asp-for="@Model.Password"/>
+                    <span asp-validation-for="@Model.Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label>비밀번호 재입력</label>
-                    <input class="form-control" type="text" />
+                    <label asp-for="@Model.ConfirmPassword">비밀번호 재입력</label>
+                    <input class="form-control" type="password" asp-for="@Model.ConfirmPassword"/>
+                    <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mt-4">
-                    <button type="submit" class="btn btn-primary">가입</button>
+                    <button type="submit" class="btn btn-primary">등록</button>
                 </div>
             </form>
 

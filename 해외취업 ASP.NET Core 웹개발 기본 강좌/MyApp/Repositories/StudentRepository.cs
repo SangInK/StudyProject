@@ -50,6 +50,11 @@ namespace MyApp.Repositories
             _context.Students.Update(student);
         }
 
+        public void DeleteSutduent(Student student)
+        {
+            _context.Students.Remove(student);
+        }
+
 
         #endregion
     }

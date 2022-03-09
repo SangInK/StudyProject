@@ -1,10 +1,19 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyApp.Data;
+using MyApp.Models;
 using MyApp.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+// Entitiy사용을 위한 설정
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.Password.RequiredLength = 5;
+}).AddEntityFrameworkStores<MyAppContext>();
+
 
 #region ==================== web application 종속성 주입 
 //Transient: 요청 받을 때마다 생성
@@ -27,7 +36,7 @@ builder.Services.AddDbContext<MyAppContext>(options =>
 var app = builder.Build();
 
 // Transient로 종속성 주입된 DbSeeder의 SeedDatabase() 함수를 호출
-app.Services.CreateScope().ServiceProvider.GetService<DbSeeder>().SeedDatabase().Wait();
+//app.Services.CreateScope().ServiceProvider.GetService<DbSeeder>().SeedDatabase().Wait();
 
 
 app.UseHttpsRedirection();
@@ -41,12 +50,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseRouting();
 
+app.UseAuthorization();
+app.UseAuthentication();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 
-
-app.UseAuthorization();
 
 app.Run();

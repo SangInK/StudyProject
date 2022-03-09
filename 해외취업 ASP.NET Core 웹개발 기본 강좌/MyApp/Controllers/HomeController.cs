@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyApp.Models;
 using MyApp.Repositories;
 using MyApp.ViewModels;
@@ -37,6 +38,7 @@ namespace MyApp.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Student()
         {
             StudentTeacherViewModel viewModel = new StudentTeacherViewModel()
@@ -49,6 +51,7 @@ namespace MyApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public IActionResult Student(StudentTeacherViewModel model){
             //[Bind("Name", "Age")]Student model
@@ -111,6 +114,19 @@ namespace MyApp.Controllers
             }
 
             return RedirectToAction("DetailStudent", new { id = student.Id });
+        }
+
+        public IActionResult DeleteStudent(int id)
+        {
+            Student student = _studentRepository.GetStudent(id);
+
+            if (student != null)
+            {
+                _studentRepository.DeleteSutduent(student);
+                _studentRepository.SaveEditData();
+            }
+
+            return RedirectToAction("Student");
         }
         #endregion
     }
